@@ -7,7 +7,7 @@ public class Policy {
     private int policyHolderAge;
     private String policyHolderSmokingStatus;
     private double policyHolderHeight;
-    private int policyHolderWeight;
+    private double policyHolderWeight;
 
    // No arg constructor, default's for all fields
     public Policy() {
@@ -22,7 +22,7 @@ public class Policy {
     }
 
     // Constructor that accepts arguments
-    public Policy(int number, String provider, String firstName, String lastName, int age, String smokingStatus, double height, int weight) {
+    public Policy(int number, String provider, String firstName, String lastName, int age, String smokingStatus, double height, double weight) {
         policyNumber = number;
         providerName = provider;
         policyHolderFirstName = firstName;
@@ -62,7 +62,7 @@ public class Policy {
         policyHolderHeight = height;
     }
 
-    public void setPolicyHolderWeight(int weight) {
+    public void setPolicyHolderWeight(double weight) {
         policyHolderWeight = weight;
     }
 
@@ -95,18 +95,19 @@ public class Policy {
         return policyHolderHeight;
     }
 
-    public int getPolicyHolderWeight() {
+    public double getPolicyHolderWeight() {
         return policyHolderWeight;
     }
 
     // Method for calculating policyholder's BMI
-    public double calculateBMI(double policyHolderHeight, int policyHolderWeight) {
-        return (policyHolderWeight * 703) / (Math.pow(policyHolderHeight, 2));
+    public double calculateBMI(double policyHolderHeight, double policyHolderWeight) {
+        return (policyHolderWeight * 703) / (policyHolderHeight * policyHolderHeight);
     }
 
     // Method that calculates and returns the price of insurance policy
-    public double calculateInsurancePolicy(int policyHolderAge, String policyHolderSmokingStatus, double policyHolderHeight, int policyHolderWeight) {
-        int insuranceBaseFee = 600;
+    public double calculateInsurancePolicy(int policyHolderAge, String policyHolderSmokingStatus, double policyHolderHeight, double policyHolderWeight) {
+        double insuranceBaseFee = 600;
+        double bmi = calculateBMI(policyHolderHeight, policyHolderWeight);
 
         if (policyHolderAge > 50) {
             insuranceBaseFee += 75; // If policyholder is over 50, add 75 to fee
@@ -116,8 +117,8 @@ public class Policy {
             insuranceBaseFee += 100; // If policyholder is a smoker, add 100 to fee
         }
 
-        if (calculateBMI(policyHolderHeight, policyHolderWeight) > 35) {
-            insuranceBaseFee += (int) (calculateBMI(policyHolderHeight, policyHolderWeight) - 35 * 20);
+        if (bmi > 35) {
+            insuranceBaseFee += (bmi - 35) * 20;
         }
 
         return insuranceBaseFee;
