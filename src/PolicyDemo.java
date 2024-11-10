@@ -1,8 +1,15 @@
 import java.util.Scanner;
+import java.io.*;
 
 public class PolicyDemo {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
+
+        // Read from a file
+        File file = new File("PolicyInformation.txt");
+        Scanner inputFile = new Scanner(file);
+
+        System.out.println("First line: " + inputFile.nextLine());
 
         // Attributes
         int policyNumber;
