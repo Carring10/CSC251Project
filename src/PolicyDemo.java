@@ -22,6 +22,9 @@ public class PolicyDemo {
         double policyHolderHeight;
         double policyHolderWeight;
 
+        int numberOfSmokers = 0;
+        int numberOfNonSmokers = 0;
+
         // Process the file as long as it has not come to an end
         while(inputFile.hasNext()) {
             policyNumber = inputFile.nextInt();
@@ -42,6 +45,11 @@ public class PolicyDemo {
             Policy policy = new Policy(policyNumber, providerName, policyHolderFirstName, policyHolderLastName,policyHolderAge, policyHolderSmokingStatus, policyHolderHeight, policyHolderWeight);
             policies.add(policy); // Add policy object to the list
 
+            // Accumulate number of smokers and non-smokers
+            if (policyHolderSmokingStatus.equalsIgnoreCase("smoker")) {
+                numberOfSmokers++;
+            } else numberOfNonSmokers++;
+
             // Skip blank line between policies if it exists
             if (inputFile.hasNextLine()) {
                 inputFile.nextLine();
@@ -61,6 +69,10 @@ public class PolicyDemo {
             System.out.println("Policyholder's Weight: " + policy.getPolicyHolderWeight() + " pounds");
             System.out.printf("Policyholder's BMI: %.2f%n", policy.calculateBMI(policy.getPolicyHolderHeight(), policy.getPolicyHolderWeight()));
             System.out.printf("Policy Price: $%.2f%n", policy.calculateInsurancePolicy(policy.getPolicyHolderAge(), policy.getPolicyHolderSmokingStatus(), policy.getPolicyHolderHeight(), policy.getPolicyHolderWeight()));
+            System.out.println();
         }
+
+        System.out.println("The number of policies with a smoker is: " + numberOfSmokers);
+        System.out.println("The number of policies with a non-smoker is: " + numberOfNonSmokers);
     }
 }
