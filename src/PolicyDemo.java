@@ -42,6 +42,7 @@ public class PolicyDemo {
         policyHolderWeight = scanner.nextDouble();
         scanner.nextLine();
 
+        // @param policyNumber, providerName, policyHolderFirstName, policyHolderLastName,policyHolderAge, policyHolderSmokingStatus, policyHolderHeight, policyHolderWeight
         Policy policy = new Policy(policyNumber, providerName, policyHolderFirstName, policyHolderLastName,policyHolderAge, policyHolderSmokingStatus, policyHolderHeight, policyHolderWeight);
         System.out.println("Policy Number: " + policy.getPolicyNumber());
         System.out.println("Provider Name: " + policy.getProviderName());
