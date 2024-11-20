@@ -1,4 +1,5 @@
 public class PolicyHolder {
+    private Policy policy; // Aggregation, Policy "has a" PolicyHolder
     private String policyHolderFirstName;
     private String policyHolderLastName;
     private int policyHolderAge;
@@ -6,24 +7,32 @@ public class PolicyHolder {
     private double policyHolderHeight;
     private double policyHolderWeight;
 
+    public static int count = 0; // To hold number of Policies
+
     // No arg constructor
     public PolicyHolder() {
+        policy = new Policy();
         policyHolderFirstName = "Jane";
         policyHolderLastName = "Doe";
         policyHolderAge = 0;
         policyHolderSmokingStatus = "non-smoker";
         policyHolderHeight = 0;
         policyHolderWeight = 0;
+
+        count++;
     }
 
     // Constructor that accepts arguments
-    public PolicyHolder(String firstName, String lastName, int age, String smokingStatus, double height, double weight) {
+    public PolicyHolder(Policy policy, String firstName, String lastName, int age, String smokingStatus, double height, double weight) {
+        this.policy = new Policy(policy); // Use the copy constructor to avoid security hole
         policyHolderFirstName = firstName;
         policyHolderLastName = lastName;
         policyHolderAge = age;
         policyHolderSmokingStatus = smokingStatus;
         policyHolderHeight = height;
         policyHolderWeight = weight;
+
+        count++;
     }
 
     // @param firstName - the policyholder's first name
@@ -115,15 +124,17 @@ public class PolicyHolder {
     }
 
     public String toString() {
-        return String.format(
-                "\n" +
+        String policyDetails = String.format(
+                "\n" + policy +
                 "\nPolicyholder's First Name: " + getPolicyHolderFirstName() +
                 "\nPolicyholder's Last Name: " + getPolicyHolderLastName() +
                 "\nPolicyholder's Age: " + getPolicyHolderAge() +
                 "\nPolicyholder's Smoking Status: " + getPolicyHolderSmokingStatus() +
                 "\nPolicyholder's Height: " + getPolicyHolderHeight() + " inches" +
                 "\nPolicyholder's Weight: " + getPolicyHolderWeight() + " pounds" +
-                "\nPolicyholder's BMI: %.2f%n", calculateBMI(getPolicyHolderHeight(), getPolicyHolderWeight())) +
-                "\nPolicy Price: $%.2f%n" + calculateInsurancePolicy(getPolicyHolderAge(), getPolicyHolderSmokingStatus(), getPolicyHolderHeight(), getPolicyHolderWeight());
+                "\nPolicyholder's BMI: %.2f%n", calculateBMI(getPolicyHolderHeight(), getPolicyHolderWeight()));
+        String policyPrice = String.format("\nPolicy Price: $%.2f%n", calculateInsurancePolicy(getPolicyHolderAge(), getPolicyHolderSmokingStatus(), getPolicyHolderHeight(), getPolicyHolderWeight()));
+
+        return policyDetails + policyPrice;
     }
 }
