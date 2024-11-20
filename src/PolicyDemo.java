@@ -42,7 +42,7 @@ public class PolicyDemo {
 
 
             // @param policyNumber, providerName, policyHolderFirstName, policyHolderLastName,policyHolderAge, policyHolderSmokingStatus, policyHolderHeight, policyHolderWeight
-            Policy policy = new Policy(policyNumber, providerName, policyHolderFirstName, policyHolderLastName,policyHolderAge, policyHolderSmokingStatus, policyHolderHeight, policyHolderWeight);
+            Policy policy = new Policy(policyNumber, providerName);
             policies.add(policy); // Add policy object to the list
 
             // Accumulate number of smokers and non-smokers

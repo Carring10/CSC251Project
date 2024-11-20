@@ -85,4 +85,43 @@ public class PolicyHolder {
     public double getPolicyHolderWeight() {
         return policyHolderWeight;
     }
+
+    // Method for calculating policyholder's BMI
+    // @return the calculated BMI of the policyholder
+    public double calculateBMI(double policyHolderHeight, double policyHolderWeight) {
+        return (policyHolderWeight * 703) / (policyHolderHeight * policyHolderHeight);
+    }
+
+    // Method that calculates and returns the price of insurance policy
+    // @param policyHolderAge, policyHolderSmokingStatus, policyHolderHeight, policyHolderWeight
+    // @return calculate the insurance policy cost based on BMI and smoking status
+    public double calculateInsurancePolicy(int policyHolderAge, String policyHolderSmokingStatus, double policyHolderHeight, double policyHolderWeight) {
+        double insuranceBaseFee = 600;
+        double bmi = calculateBMI(policyHolderHeight, policyHolderWeight);
+
+        if (policyHolderAge > 50) {
+            insuranceBaseFee += 75; // If policyholder is over 50, add 75 to fee
+        }
+
+        if (policyHolderSmokingStatus.equalsIgnoreCase("smoker")) {
+            insuranceBaseFee += 100; // If policyholder is a smoker, add 100 to fee
+        }
+
+        if (bmi > 35) {
+            insuranceBaseFee += (bmi - 35) * 20;
+        }
+
+        return insuranceBaseFee;
+    }
+
+    public String toString() {
+        return String.format("\nPolicyholder's First Name: " + getPolicyHolderFirstName() +
+                "\nPolicyholder's Last Name: " + getPolicyHolderLastName() +
+                "\nPolicyholder's Age: " + getPolicyHolderAge() +
+                "\nPolicyholder's Smoking Status: " + getPolicyHolderSmokingStatus() +
+                "\nPolicyholder's Height: " + getPolicyHolderHeight() + " inches" +
+                "\nPolicyholder's Weight: " + getPolicyHolderWeight() + " pounds" +
+                "\nPolicyholder's BMI: %.2f%n", calculateBMI(getPolicyHolderHeight(), getPolicyHolderWeight())) +
+                "\nPolicy Price: $%.2f%n" + calculateInsurancePolicy(getPolicyHolderAge(), getPolicyHolderSmokingStatus(), getPolicyHolderHeight(), getPolicyHolderWeight());
+    }
 }
