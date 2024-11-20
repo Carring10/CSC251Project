@@ -3,16 +3,20 @@ public class Policy {
     private int policyNumber;
     private String providerName;
 
+    public static int count = 0; // To hold number of Policies
+
    // No arg constructor, default's for all fields
     public Policy() {
-        policyNumber = 1;
+        policyNumber = 0;
         providerName = "None";
+        count++;
     }
 
     // Constructor that accepts arguments
     public Policy(int number, String provider) {
         policyNumber = number;
         providerName = provider;
+        count++;
     }
 
     // Setter methods

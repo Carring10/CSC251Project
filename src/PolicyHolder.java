@@ -115,7 +115,9 @@ public class PolicyHolder {
     }
 
     public String toString() {
-        return String.format("\nPolicyholder's First Name: " + getPolicyHolderFirstName() +
+        return String.format(
+                "\n" +
+                "\nPolicyholder's First Name: " + getPolicyHolderFirstName() +
                 "\nPolicyholder's Last Name: " + getPolicyHolderLastName() +
                 "\nPolicyholder's Age: " + getPolicyHolderAge() +
                 "\nPolicyholder's Smoking Status: " + getPolicyHolderSmokingStatus() +
